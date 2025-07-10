@@ -245,10 +245,6 @@ public class WirelessTerminalMenuHost<T extends WirelessTerminalItem> extends It
         return getItemStack();
     }
 
-    public String getCloseHotkey() {
-        return HotkeyAction.WIRELESS_TERMINAL;
-    }
-
     @Override
     public long insert(Player player, AEKey what, long amount, Actionable mode) {
         // We do not know the real link-status on the client-side
