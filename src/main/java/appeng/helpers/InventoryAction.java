@@ -32,5 +32,5 @@ public enum InventoryAction {
     // extra...
     MOVE_REGION, PICKUP_SINGLE, ROLL_UP, ROLL_DOWN, AUTO_CRAFT, PLACE_SINGLE,
 
-    SET_FILTER
+    SET_FILTER, SORT
 }

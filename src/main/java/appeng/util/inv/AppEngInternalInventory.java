@@ -18,13 +18,9 @@
 
 package appeng.util.inv;
 
-import java.util.Arrays;
-
+import appeng.api.inventories.BaseInternalInventory;
+import appeng.util.inv.filter.IAEItemFilter;
 import com.google.common.base.Preconditions;
-
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -32,11 +28,13 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 
-import appeng.api.inventories.BaseInternalInventory;
-import appeng.util.inv.filter.IAEItemFilter;
+import java.util.Arrays;
+import java.util.Comparator;
 
-public class AppEngInternalInventory extends BaseInternalInventory {
+public class AppEngInternalInventory extends BaseInternalInventory implements Sortable {
     private boolean enableClientEvents = false;
     private InternalInventoryHost host;
     private final NonNullList<ItemStack> stacks;
@@ -213,4 +211,11 @@ public class AppEngInternalInventory extends BaseInternalInventory {
     public int size() {
         return stacks.size();
     }
+
+    @Override
+    public void sort() {
+        stacks.sort(Comparator.comparing(PatternSortKey::of));
+        onContentsChanged(0);
+    }
+
 }
